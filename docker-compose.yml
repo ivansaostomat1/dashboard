@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data # Mount data directory for persistence/updates
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      # If running in Docker, 'backend' resolves to the service name
+      # But since Next.js is SSR/Client, meaningful URL depends on access context
+      # For server-side fetch: http://backend:8000
+      # For client-side fetch: http://localhost:8000 (from browser)
+      # We'll set a default, but code should handle client-side env vars if needed.
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+    restart: always

@@ -1,46 +1,46 @@
-# Car Market Analytics Dashboard
+# Dashboard Analitik Pasar Mobil
 
-A deterministic analytics dashboard for the automotive market, designed to provide clear, data-driven insights into car specifications, sales performance, and value analysis.
+Dashboard analitik deterministik untuk pasar otomotif, dirancang untuk memberikan wawasan berbasis data yang jelas mengenai spesifikasi mobil, performa penjualan, dan analisis nilai (value for money).
 
-## 📊 Data & Scoring Methodology
+## 📊 Metodologi Data & Penilaian
 
-The dashboard analyzes cars based on 5 key deterministic metrics (0-10 Scale), processed from raw specification and sales data.
+Dashboard ini menganalisis mobil berdasarkan 5 metrik deterministik utama (Skala 0-10), yang diproses dari data spesifikasi mentah dan data penjualan.
 
-### 1. Feature Score (Tech & Luxury)
-*Reflects the technological sophistication and luxury level of the vehicle.*
-- **Algorithm**: Counts the presence of premium features such as Sunroof, Wireless Charger, Power Tailgate, Electric/Ventilated/Massage Seats, Head-Up Display, and Ambient Light.
-- **ADAS weighting**: Includes Advanced Driver Assistance Systems (ACC, LKA, Lane Centering, Camera 360) as high-value features.
-- **Normalization**: Scored relative to the most feature-rich car in the dataset.
+### 1. Skor Fitur (Teknologi & Kemewahan)
+*Mencerminkan kecanggihan teknologi dan tingkat kemewahan kendaraan.*
+- **Algoritma**: Menghitung keberadaan fitur premium seperti Sunroof, Wireless Charger, Power Tailgate, Kursi Elektrik/Ventilasi/Pijat, Head-Up Display, dan Ambient Light.
+- **Bobot ADAS**: Memasukkan Sistem Bantuan Pengemudi Canggih (ACC, LKA, Lane Centering, Kamera 360) sebagai fitur bernilai tinggi.
+- **Normalisasi**: Dinilai relatif terhadap mobil dengan fitur terlengkap dalam dataset.
 
-### 2. Safety Score (Protection)
-*Evaluates the occupant protection and accident avoidance capabilities.*
-- **Passive Safety**: Weighted sum of Airbag count (0.5 points per airbag).
-- **Active Safety**: Presence of ABS, EBD, ESC, TCS, AEB (Autonomous Emergency Braking), RCTA, and ISOFIX.
-- **Normalization**: Scored relative to the safest car in the dataset.
+### 2. Skor Keselamatan (Perlindungan)
+*Mengevaluasi perlindungan penumpang dan kemampuan pencegahan kecelakaan.*
+- **Keselamatan Pasif**: Jumlah Airbag (0.5 poin per airbag).
+- **Keselamatan Aktif**: Keberadaan ABS, EBD, ESC, TCS, AEB (Pengereman Darurat Otonom), RCTA, dan ISOFIX.
+- **Normalisasi**: Dinilai relatif terhadap mobil paling aman dalam dataset.
 
-### 3. Performance Score (Speed & Power)
-*Measures raw engine output and driving capability.*
-- **Metrics**: Combination of **Horsepower (HP)** and **Torque (Nm)**.
-- **Weighting**: `Points = HP + (Torque * 0.8)`
-- **Normalization**: Scored relative to the highest performance vehicle.
+### 3. Skor Performa (Kecepatan & Tenaga)
+*Mengukur output mesin mentah dan kemampuan berkendara.*
+- **Metrik**: Kombinasi dari **Horsepower (HP)** dan **Torsi (Nm)**.
+- **Pembobotan**: `Poin = HP + (Torsi * 0.8)`
+- **Normalisasi**: Dinilai relatif terhadap kendaraan dengan performa tertinggi.
 
-### 4. Popularity Score (Market Acceptance)
-*Indicates market demand and buyer confidence.*
-- **Metric**: Based purely on **Total Sales (Wholesales) in 2025**.
-- **Normalization**: The best-selling car gets a 10; others are scaled proportionally.
+### 4. Skor Popularitas (Penerimaan Pasar)
+*Menunjukkan permintaan pasar dan kepercayaan pembeli.*
+- **Metrik**: Didasarkan murni pada **Total Penjualan (Wholesales) tahun 2025**.
+- **Normalisasi**: Mobil terlaris mendapatkan skor 10; yang lain diskalakan secara proporsional.
 
-### 5. Value Score (Bang for Buck)
-*The ultimate buying guide metric.*
-- **Formula**: `(Feature + Safety + Performance) / Price`
-- **Context**: High scores indicate cars that offer substantial features and performance for their price point. Low scores typically indicate overpriced models or luxury brands where brand equity outweighs raw specs.
+### 5. Skor Value (Nilai Uang)
+*Metrik panduan pembelian utama.*
+- **Rumus**: `(Fitur + Keselamatan + Performa) / Harga`
+- **Konteks**: Skor tinggi menunjukkan mobil yang menawarkan fitur dan performa substansial untuk harganya. Skor rendah biasanya menunjukkan model yang terlalu mahal atau merek mewah di mana ekuitas merek lebih berat daripada spesifikasi mentah.
 
 ---
 
-## 🛠 Tech Stack
+## 🛠 Teknologi yang Digunakan
 
 ### Backend
 - **Framework**: [FastAPI](https://fastapi.tiangolo.com/) (Python)
-- **Data Processing**: Pandas, NumPy
+- **Pemrosesan Data**: Pandas, NumPy
 - **Containerization**: Docker
 
 ### Frontend
@@ -48,21 +48,21 @@ The dashboard analyzes cars based on 5 key deterministic metrics (0-10 Scale), p
 - **Styling**: Tailwind CSS
 - **Containerization**: Docker
 
-## 🚀 Getting Started
+## 🚀 Cara Memulai
 
-### Prerequisites
+### Prasyarat
 - Docker & Docker Compose
 
-### Running the App
-1. Clone the repository:
+### Menjalankan Aplikasi
+1. Clone repository:
    ```bash
    git clone https://github.com/ivansaostomat1/dashboard.git
    cd dashboard
    ```
-2. Start the services:
+2. Jalankan layanan:
    ```bash
    docker-compose up --build
    ```
-3. Access the dashboard:
+3. Akses dashboard:
    - **Frontend**: http://localhost:3000
    - **Backend API**: http://localhost:8000/docs

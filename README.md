@@ -1,38 +1,52 @@
 # Dashboard Analitik Pasar Mobil
 
-Dashboard analitik deterministik untuk pasar otomotif, dirancang untuk memberikan wawasan berbasis data yang jelas mengenai spesifikasi mobil, performa penjualan, dan analisis nilai (value for money).
+Dashboard analitik deterministik untuk pasar otomotif, dirancang untuk memberikan wawasan berbasis data yang jelas mengenai spesifikasi mobil, performa penjualan, dan analisis indeks kendaraan multi-dimensi.
 
-## 📊 Metodologi Data & Penilaian
+## 📊 Metodologi Data & Indeks (Multi-Index Analytics)
 
-Dashboard ini menganalisis mobil berdasarkan 5 metrik deterministik utama (Skala 0-10), yang diproses dari data spesifikasi mentah dan data penjualan.
+Dashboard ini menggunakan **Framework Analisis Multi-Dimensi** yang menstandarisasi data spesifikasi mentah menggunakan metode **Z-Score Normalization**. Hal ini memungkinkan perbandingan objektif antar fitur yang memiliki skala berbeda.
 
-### 1. Skor Fitur (Teknologi & Kemewahan)
-*Mencerminkan kecanggihan teknologi dan tingkat kemewahan kendaraan.*
-- **Algoritma**: Menghitung keberadaan fitur premium seperti Sunroof, Wireless Charger, Power Tailgate, Kursi Elektrik/Ventilasi/Pijat, Head-Up Display, dan Ambient Light.
-- **Bobot ADAS**: Memasukkan Sistem Bantuan Pengemudi Canggih (ACC, LKA, Lane Centering, Kamera 360) sebagai fitur bernilai tinggi.
-- **Normalisasi**: Dinilai relatif terhadap mobil dengan fitur terlengkap dalam dataset.
+### 1. Performance Index
+*Mengukur output tenaga dan kemampuan teknis mesin.*
+- **Metrik**: Horsepower (HP), Torsi (Nm), Kapasitas Mesin (CC), GVW, EV Range, dan Kapasitas Baterai.
+- **Normalisasi**: Z-Score (Makin tinggi makin baik).
 
-### 2. Skor Keselamatan (Perlindungan)
-*Mengevaluasi perlindungan penumpang dan kemampuan pencegahan kecelakaan.*
-- **Keselamatan Pasif**: Jumlah Airbag (0.5 poin per airbag).
-- **Keselamatan Aktif**: Keberadaan ABS, EBD, ESC, TCS, AEB (Pengereman Darurat Otonom), RCTA, dan ISOFIX.
-- **Normalisasi**: Dinilai relatif terhadap mobil paling aman dalam dataset.
+### 2. Efficiency Index
+*Mengukur tingkat efisiensi penggunaan sumber daya.*
+- **Metrik**: CC, Berat Kendaraan, EV Range, dan Kapasitas Baterai.
+- **Logika**: CC dan Berat yang lebih rendah memberikan skor positif (makin kecil makin efisien).
 
-### 3. Skor Performa (Kecepatan & Tenaga)
-*Mengukur output mesin mentah dan kemampuan berkendara.*
-- **Metrik**: Kombinasi dari **Horsepower (HP)** dan **Torsi (Nm)**.
-- **Pembobotan**: `Poin = HP + (Torsi * 0.8)`
-- **Normalisasi**: Dinilai relatif terhadap kendaraan dengan performa tertinggi.
+### 3. Safety Index
+*Mengevaluasi fitur perlindungan pasif dan aktif.*
+- **Metrik**: Jumlah Airbag dan 14+ fitur ADAS/Safety (ABS, EBD, ESC, AEB, ACC, LKA, Camera 360, dll).
 
-### 4. Skor Popularitas (Penerimaan Pasar)
-*Menunjukkan permintaan pasar dan kepercayaan pembeli.*
-- **Metrik**: Didasarkan murni pada **Total Penjualan (Wholesales) tahun 2025**.
-- **Normalisasi**: Mobil terlaris mendapatkan skor 10; yang lain diskalakan secara proporsional.
+### 4. Comfort & Luxury Index
+*Mengukur tingkat kemewahan dan kenyamanan interior.*
+- **Metrik**: Ventilated/Massage Seats, Air Suspension, Sunroof, Ambient Light, Electric Seat, dan Power Tailgate.
 
-### 5. Skor Value (Nilai Uang)
-*Metrik panduan pembelian utama.*
-- **Rumus**: `(Fitur + Keselamatan + Performa) / Harga`
-- **Konteks**: Skor tinggi menunjukkan mobil yang menawarkan fitur dan performa substansial untuk harganya. Skor rendah biasanya menunjukkan model yang terlalu mahal atau merek mewah di mana ekuitas merek lebih berat daripada spesifikasi mentah.
+### 5. Technology Index
+*Mencerminkan kecanggihan konektivitas dan asisten digital.*
+- **Metrik**: Apple CarPlay, Android Auto, Wireless Charger, HUD, Rear Seat Entertainment, dan Sistem Monitoring Pengemudi.
+
+### 6. Space & Practicality Index
+*Menilai fungsionalitas ruang dan dimensi bagi pengguna.*
+- **Metrik**: Jumlah Kursi, Kapasitas Bagasi, Panjang/Lebar/Tinggi, Wheelbase, dan Ground Clearance.
+
+### 7. Popularity Index
+*Menunjukkan penerimaan pasar secara riil.*
+- **Metrik**: Berdasarkan data Wholesales tahun 2025.
+
+### 8. Price Index (Affordability)
+*Metrik keterjangkauan harga relatif.*
+- **Normalisasi**: Z-Score negatif terhadap Harga OTR (Harga lebih rendah mendapatkan indeks lebih tinggi).
+
+---
+
+## 📈 Statistik & KPI Utama
+Dashboard menyediakan analisis statistik mendalam pada bagian header:
+- **Median Harga**: Nilai tengah pasar untuk menghindari anomali harga mobil ultra-mewah.
+- **P75 Performance/Safety/Comfort**: Performa kendaraan di kuartil atas (top 25%) sebagai tolok ukur standar tinggi.
+- **Std Dev Harga**: Menunjukkan tingkat variasi harga dalam dataset.
 
 ---
 
@@ -40,18 +54,20 @@ Dashboard ini menganalisis mobil berdasarkan 5 metrik deterministik utama (Skala
 
 ### Backend
 - **Framework**: [FastAPI](https://fastapi.tiangolo.com/) (Python)
-- **Pemrosesan Data**: Pandas, NumPy
+- **Pemrosesan Data**: Pandas, NumPy (Statistik Deskriptif & Normalisasi)
 - **Containerization**: Docker
 
 ### Frontend
-- **Framework**: [Next.js 14+](https://nextjs.org/) (React, TypeScript)
-- **Styling**: Tailwind CSS
+- **Framework**: [Next.js 15+](https://nextjs.org/) (React, TypeScript)
+- **Visualisasi**: Custom Glassmorphism UI & Analytics Tables
 - **Containerization**: Docker
+
+---
 
 ## 🚀 Cara Memulai
 
 ### Prasyarat
-- Docker & Docker Compose
+- Docker & Docker Desktop (Aktif)
 
 ### Menjalankan Aplikasi
 1. Clone repository:

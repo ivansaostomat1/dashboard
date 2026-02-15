@@ -1,3 +1,4 @@
+// app/components/helpers.ts
 export function formatCurrency(n: number) {
     if (n >= 1e9) return `Rp ${(n / 1e9).toFixed(1)} Miliar`;
     if (n >= 1e6) return `Rp ${(n / 1e6).toFixed(0)} Juta`;

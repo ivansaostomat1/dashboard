@@ -5,9 +5,9 @@ from services import (
     get_all_cars,
     get_summary,
     get_price_distribution,
-    get_score_distribution,
+    get_index_distribution,
     get_brand_analysis,
-    get_correlation_matrix,   # ← baru
+    get_correlation_matrix,
 )
 
 
@@ -30,8 +30,9 @@ def root():
             "cars": "/api/cars",
             "summary": "/api/summary",
             "price_distribution": "/api/price-distribution",
-            "score_distribution": "/api/score-distribution",
+            "index_distribution": "/api/index-distribution",
             "brand_analysis": "/api/brand-analysis",
+            "correlation": "/api/correlation",
         },
     }
 
@@ -51,9 +52,9 @@ def price_distribution():
     return get_price_distribution()
 
 
-@app.get("/api/score-distribution")
-def score_distribution():
-    return get_score_distribution()
+@app.get("/api/index-distribution")
+def index_distribution():
+    return get_index_distribution()
 
 
 @app.get("/api/brand-analysis")
@@ -63,4 +64,3 @@ def brand_analysis():
 @app.get("/api/correlation")
 def correlation():
     return get_correlation_matrix()
-

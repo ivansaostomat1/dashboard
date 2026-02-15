@@ -1,3 +1,4 @@
+// app/components/BrandAnalysis.tsx
 'use client';
 
 import { useMemo, useState } from 'react';
@@ -5,7 +6,7 @@ import { Brand } from './types';
 import { Icons } from './icons';
 import { formatCurrency } from './helpers';
 
-type SortKey = 'BRAND' | 'avg_price' | 'avg_feature' | 'avg_safety' | 'avg_performance' | 'avg_value' | 'total_sales';
+type SortKey = 'BRAND' | 'avg_price_otr' | 'avg_performance' | 'avg_efficiency' | 'avg_safety' | 'avg_comfort' | 'avg_tech' | 'avg_space' | 'avg_popularity' | 'avg_price' | 'total_sales';
 type SortDir = 'asc' | 'desc';
 
 interface BrandAnalysisProps {
@@ -53,11 +54,15 @@ export default function BrandAnalysis({ brands }: BrandAnalysisProps) {
 
     const columns: { key: SortKey; label: string; align: 'left' | 'right' }[] = [
         { key: 'BRAND', label: 'Brand', align: 'left' },
-        { key: 'avg_price', label: 'Avg Price', align: 'right' },
-        { key: 'avg_feature', label: 'Feature', align: 'right' },
-        { key: 'avg_safety', label: 'Safety', align: 'right' },
+        { key: 'avg_price_otr', label: 'Avg Price', align: 'right' },
         { key: 'avg_performance', label: 'Perf', align: 'right' },
-        { key: 'avg_value', label: 'Value', align: 'right' },
+        { key: 'avg_efficiency', label: 'Eff', align: 'right' },
+        { key: 'avg_safety', label: 'Safety', align: 'right' },
+        { key: 'avg_comfort', label: 'Comfort', align: 'right' },
+        { key: 'avg_tech', label: 'Tech', align: 'right' },
+        { key: 'avg_space', label: 'Space', align: 'right' },
+        { key: 'avg_popularity', label: 'Pop', align: 'right' },
+        { key: 'avg_price', label: 'Price Idx', align: 'right' },
         { key: 'total_sales', label: 'Sales', align: 'right' },
     ];
 
@@ -106,19 +111,31 @@ export default function BrandAnalysis({ brands }: BrandAnalysisProps) {
                             <tr key={i}>
                                 <td className="font-medium" style={{ color: 'var(--text-primary)' }}>{b.BRAND}</td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {formatCurrency(b.avg_price)}
+                                    {formatCurrency(b.avg_price_otr)}
                                 </td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {b.avg_feature.toFixed(1)}
+                                    {b.avg_performance.toFixed(2)}
                                 </td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {b.avg_safety.toFixed(1)}
+                                    {b.avg_efficiency.toFixed(2)}
                                 </td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {b.avg_performance.toFixed(1)}
+                                    {b.avg_safety.toFixed(2)}
                                 </td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {b.avg_value.toFixed(1)}
+                                    {b.avg_comfort.toFixed(2)}
+                                </td>
+                                <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
+                                    {b.avg_tech.toFixed(2)}
+                                </td>
+                                <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
+                                    {b.avg_space.toFixed(2)}
+                                </td>
+                                <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
+                                    {b.avg_popularity.toFixed(2)}
+                                </td>
+                                <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
+                                    {b.avg_price.toFixed(2)}
                                 </td>
                                 <td style={{ textAlign: 'right' }}>
                                     <div className="flex items-center justify-end gap-2">

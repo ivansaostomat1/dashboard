@@ -2,7 +2,7 @@ import pandas as pd
 from typing import List, Dict
 import numpy as np
 
-DATA_PATH = "../data/processed/final_car_data.csv"
+DATA_PATH = "../data/processed/car_indices.csv"
 
 
 def load_df() -> pd.DataFrame:
@@ -37,11 +37,19 @@ def get_summary() -> Dict:
         "total_brands": int(df["BRAND"].nunique()),
         "price_min": safe(df["HARGAOTR"].min()),
         "price_max": safe(df["HARGAOTR"].max()),
-        "avg_feature": safe(df["SCORE_FEATURE"].mean()),
-        "avg_safety": safe(df["SCORE_SAFETY"].mean()),
-        "avg_performance": safe(df["SCORE_PERFORMANCE"].mean()),
-        "avg_popularity": safe(df["SCORE_POPULARITY"].mean()),
-        "avg_value": safe(df["SCORE_VALUE"].mean()),
+        "price_median": safe(df["HARGAOTR"].median()),
+        "price_std": safe(df["HARGAOTR"].std()),
+        "p75_performance": safe(df["INDEX_PERFORMANCE"].quantile(0.75)),
+        "p75_safety": safe(df["INDEX_SAFETY"].quantile(0.75)),
+        "p75_comfort": safe(df["INDEX_COMFORT"].quantile(0.75)),
+        "avg_performance": safe(df["INDEX_PERFORMANCE"].mean()),
+        "avg_efficiency": safe(df["INDEX_EFFICIENCY"].mean()),
+        "avg_safety": safe(df["INDEX_SAFETY"].mean()),
+        "avg_comfort": safe(df["INDEX_COMFORT"].mean()),
+        "avg_tech": safe(df["INDEX_TECH"].mean()),
+        "avg_space": safe(df["INDEX_SPACE"].mean()),
+        "avg_popularity": safe(df["INDEX_POPULARITY"].mean()),
+        "avg_price": safe(df["INDEX_PRICE"].mean()),
     }
 
 # =============================
@@ -61,17 +69,20 @@ def get_price_distribution():
 
 
 # =============================
-# SCORE DISTRIBUTION
+# INDEX DISTRIBUTION
 # =============================
-def get_score_distribution():
+def get_index_distribution():
     df = load_df()
 
     return {
-        "feature": df["SCORE_FEATURE"].tolist(),
-        "safety": df["SCORE_SAFETY"].tolist(),
-        "performance": df["SCORE_PERFORMANCE"].tolist(),
-        "popularity": df["SCORE_POPULARITY"].tolist(),
-        "value": df["SCORE_VALUE"].tolist(),
+        "performance": df["INDEX_PERFORMANCE"].tolist(),
+        "efficiency": df["INDEX_EFFICIENCY"].tolist(),
+        "safety": df["INDEX_SAFETY"].tolist(),
+        "comfort": df["INDEX_COMFORT"].tolist(),
+        "tech": df["INDEX_TECH"].tolist(),
+        "space": df["INDEX_SPACE"].tolist(),
+        "popularity": df["INDEX_POPULARITY"].tolist(),
+        "price": df["INDEX_PRICE"].tolist(),
     }
 def make_json_safe(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -90,11 +101,15 @@ def get_brand_analysis():
     grouped = (
         df.groupby("BRAND")
         .agg(
-            avg_price=("HARGAOTR", "mean"),
-            avg_feature=("SCORE_FEATURE", "mean"),
-            avg_safety=("SCORE_SAFETY", "mean"),
-            avg_performance=("SCORE_PERFORMANCE", "mean"),
-            avg_value=("SCORE_VALUE", "mean"),
+            avg_price_otr=("HARGAOTR", "mean"),
+            avg_performance=("INDEX_PERFORMANCE", "mean"),
+            avg_efficiency=("INDEX_EFFICIENCY", "mean"),
+            avg_safety=("INDEX_SAFETY", "mean"),
+            avg_comfort=("INDEX_COMFORT", "mean"),
+            avg_tech=("INDEX_TECH", "mean"),
+            avg_space=("INDEX_SPACE", "mean"),
+            avg_popularity=("INDEX_POPULARITY", "mean"),
+            avg_price=("INDEX_PRICE", "mean"),
             total_sales=("TOTAL_2025", "sum"),
             total_models=("MODEL", "count"),
         )
@@ -113,12 +128,18 @@ def get_correlation_matrix():
         "HARGAOTR",
         "HORSE POWER (HP)",
         "TORQUE (Nm)",
-        "SCORE_FEATURE",
-        "SCORE_SAFETY",
-        "SCORE_PERFORMANCE",
-        "SCORE_POPULARITY",
-        "SCORE_VALUE",
+        "INDEX_PERFORMANCE",
+        "INDEX_EFFICIENCY",
+        "INDEX_SAFETY",
+        "INDEX_COMFORT",
+        "INDEX_TECH",
+        "INDEX_SPACE",
+        "INDEX_POPULARITY",
+        "INDEX_PRICE",
     ]
+
+    # Only include columns that exist in the dataframe
+    numeric_cols = [c for c in numeric_cols if c in df.columns]
 
     corr = df[numeric_cols].corr().round(3)
 

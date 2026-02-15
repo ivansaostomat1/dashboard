@@ -1,3 +1,4 @@
+// app/components/CorrelationMatrix.tsx
 'use client';
 
 import { CorrelationData } from './types';
@@ -10,7 +11,7 @@ interface CorrelationMatrixProps {
 
 function shortenLabel(col: string) {
     return col
-        .replace('SCORE_', '')
+        .replace('INDEX_', '')
         .replace('HORSE POWER (HP)', 'HP')
         .replace('TORQUE (Nm)', 'Torque');
 }

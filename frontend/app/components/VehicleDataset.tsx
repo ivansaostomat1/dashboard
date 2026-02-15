@@ -1,3 +1,4 @@
+// app/components/VehicleDataset.tsx
 'use client';
 
 import { useMemo, useState } from 'react';
@@ -5,7 +6,7 @@ import { CarRecord } from './types';
 import { Icons } from './icons';
 import { formatCurrency } from './helpers';
 
-type SortKey = 'BRAND' | 'MODEL' | 'HARGAOTR' | 'SCORE_FEATURE' | 'SCORE_SAFETY' | 'SCORE_PERFORMANCE' | 'SCORE_POPULARITY' | 'SCORE_VALUE';
+type SortKey = 'BRAND' | 'MODEL' | 'HARGAOTR' | 'INDEX_PERFORMANCE' | 'INDEX_EFFICIENCY' | 'INDEX_SAFETY' | 'INDEX_COMFORT' | 'INDEX_TECH' | 'INDEX_SPACE' | 'INDEX_POPULARITY' | 'INDEX_PRICE';
 type SortDir = 'asc' | 'desc';
 
 interface VehicleDatasetProps {
@@ -64,11 +65,14 @@ export default function VehicleDataset({ cars }: VehicleDatasetProps) {
         { key: 'BRAND', label: 'Brand', align: 'left' },
         { key: 'MODEL', label: 'Model', align: 'left' },
         { key: 'HARGAOTR', label: 'Harga OTR', align: 'right' },
-        { key: 'SCORE_FEATURE', label: 'Feature', align: 'right' },
-        { key: 'SCORE_SAFETY', label: 'Safety', align: 'right' },
-        { key: 'SCORE_PERFORMANCE', label: 'Performance', align: 'right' },
-        { key: 'SCORE_POPULARITY', label: 'Popularity', align: 'right' },
-        { key: 'SCORE_VALUE', label: 'Value', align: 'right' },
+        { key: 'INDEX_PERFORMANCE', label: 'Perf', align: 'right' },
+        { key: 'INDEX_EFFICIENCY', label: 'Eff', align: 'right' },
+        { key: 'INDEX_SAFETY', label: 'Safety', align: 'right' },
+        { key: 'INDEX_COMFORT', label: 'Comfort', align: 'right' },
+        { key: 'INDEX_TECH', label: 'Tech', align: 'right' },
+        { key: 'INDEX_SPACE', label: 'Space', align: 'right' },
+        { key: 'INDEX_POPULARITY', label: 'Pop', align: 'right' },
+        { key: 'INDEX_PRICE', label: 'Price Idx', align: 'right' },
     ];
 
     return (
@@ -130,19 +134,28 @@ export default function VehicleDataset({ cars }: VehicleDatasetProps) {
                                     {formatCurrency(Number(c.HARGAOTR))}
                                 </td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {Number(c.SCORE_FEATURE).toFixed(2)}
+                                    {Number(c.INDEX_PERFORMANCE).toFixed(2)}
                                 </td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {Number(c.SCORE_SAFETY).toFixed(2)}
+                                    {Number(c.INDEX_EFFICIENCY).toFixed(2)}
                                 </td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {Number(c.SCORE_PERFORMANCE).toFixed(2)}
+                                    {Number(c.INDEX_SAFETY).toFixed(2)}
                                 </td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {Number(c.SCORE_POPULARITY).toFixed(2)}
+                                    {Number(c.INDEX_COMFORT).toFixed(2)}
                                 </td>
                                 <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
-                                    {Number(c.SCORE_VALUE).toFixed(2)}
+                                    {Number(c.INDEX_TECH).toFixed(2)}
+                                </td>
+                                <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
+                                    {Number(c.INDEX_SPACE).toFixed(2)}
+                                </td>
+                                <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
+                                    {Number(c.INDEX_POPULARITY).toFixed(2)}
+                                </td>
+                                <td style={{ textAlign: 'right', fontFamily: 'var(--font-mono)' }}>
+                                    {Number(c.INDEX_PRICE).toFixed(2)}
                                 </td>
                             </tr>
                         ))}

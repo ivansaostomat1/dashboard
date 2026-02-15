@@ -1,3 +1,4 @@
+// app/components/icons.tsx
 import React from 'react';
 
 export const Icons = {

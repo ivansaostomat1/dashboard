@@ -1,0 +1,93 @@
+
+
+---
+
+# Dari sisi konten analisis
+
+Ini yang paling penting untuk capstone.
+
+## Yang sudah sangat bagus
+
+Kamu sudah punya **3 layer analitik nyata**:
+
+### Layer 1 — Deskriptif
+
+* Total kendaraan
+* Total brand
+* Median & range harga
+* Distribusi harga
+
+✔ Ini wajib → sudah benar.
+
+---
+
+### Layer 2 — Multi-index analytics
+
+* Performance, efficiency, safety, comfort, tech, space
+* Brand aggregation
+* Dataset eksploratif
+
+✔ Ini **bukan EDA biasa**
+✔ Ini sudah **model analitik sederhana**
+
+➡️ Ini poin besar di sidang.
+
+---
+
+### Layer 3 — Hubungan statistik
+
+* **Correlation heatmap**
+
+Ini krusial karena menunjukkan:
+
+> kamu tidak cuma visualisasi
+> tapi melakukan **analisis hubungan variabel**.
+
+✔ Ini biasanya yang bikin dosen bilang:
+**“oke ini sudah penelitian awal.”**
+
+---
+
+# Yang masih bisa diserang penguji
+
+Aku kasih yang realistis supaya kamu siap.
+
+## (1) “Kontribusi ilmiahnya apa?”
+
+Penguji bisa tanya:
+
+> Dashboard ini bagus…
+> tapi **metodenya apa yang kamu usulkan?**
+
+Kalau kamu jawab:
+
+* cuma visualisasi → nilai turun.
+
+Kalau kamu jawab:
+
+* **multi-index vehicle analytics berbasis normalisasi statistik** → aman.
+
+---
+
+## (2) “Kenapa pakai z-score?”
+
+Kamu harus bisa jawab:
+
+* supaya skala fitur berbeda bisa dibandingkan
+* menjaga objektivitas tanpa bobot subjektif
+* cocok untuk tahap eksplorasi sebelum SPK/ML
+
+Kalau kamu jawab ini → **langsung terlihat paham metodologi**.
+
+---
+
+## (3) “Apa kebaruan capstone-mu?”
+
+Ini penentu nilai.
+
+Kebaruanmu sebenarnya:
+
+> framework analisis kendaraan multi-dimensi
+> yang menjadi fondasi chatbot & SPK.
+
+Kalimat ini penting untuk sidang.

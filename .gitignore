@@ -24,5 +24,16 @@ yarn-error.log*
 Thumbs.db
 
 # Large Data
-brosur/
-data/
+# brosur/
+# data/
+
+# Ignore files > 100MB in brosur (GitHub limit)
+brosur/*.pdf
+!brosur/
+# Specifically unignore these folders
+!data/
+!brosur/
+# But re-ignore the large one specifically if we want to be safe, 
+# or use a generic "ignore files > 100mb" if possible via git attributes, 
+# but for now I'll just ignore the specific known large file
+brosur/Next-Gen-Ranger-XLT.pdf

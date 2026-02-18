@@ -16,6 +16,9 @@ COPY backend /app/backend
 # Copy the data directory contents into the container at /app/data
 COPY data /app/data
 
+# Copy potential brochures
+COPY brosur /app/brosur
+
 # Set working directory to /app/backend so imports work as expected
 WORKDIR /app/backend
 
